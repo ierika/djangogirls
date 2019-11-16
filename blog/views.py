@@ -16,7 +16,7 @@ def post_list(request):
     })
 
 
-def post_detail(request, pk, slug):
+def post_detail(request, pk):
     """投稿ページ"""
     post = get_object_or_404(models.Post, pk=pk)
     comment_list = post.comment_set.all()
@@ -29,9 +29,7 @@ def post_detail(request, pk, slug):
             comment.post = post
             comment.author = request.user
             comment.save()
-            return render(request, 'blog/post_comment.html', {
-                'post': post,
-            })
+            return redirect('post_detail', pk=post.pk, slug=post.title)
 
     return render(request, 'blog/post_detail.html', {
         'post': post,
@@ -40,10 +38,9 @@ def post_detail(request, pk, slug):
     })
 
 
-def comment_delete(request, pk):
+def comment_delete(request, pk, comment_pk):
     """Comment delete"""
-    comment = get_object_or_404(models.Comment, pk=pk)
-    comment.delete()
-    return redirect('post_detail', kwargs={
-        'pk': comment.post,
-    })
+    comment = get_object_or_404(models.Comment, pk=comment_pk)
+    if request.method == 'POST':
+        comment.delete()
+    return redirect('post_detail', pk=pk)

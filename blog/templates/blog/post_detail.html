@@ -34,6 +34,14 @@
     {% for comment in comment_list %}
         <h5 class="d-inline">{{ comment.author }}</h5>&nbsp;&nbsp;&nbsp;<span class="small">{{ comment.created_date }}</span>
         <p>{{ comment.text }}</p>
+
+
+            <div class="text-right">
+                <form action="{% url 'comment_delete' post.pk comment.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
         <hr>
     {% endfor %}
 
