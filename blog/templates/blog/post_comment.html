@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class='row'>
+        <div class="col-xs-12 mx-auto">
+            <h2 class="text-center">Thank you for commenting!</h2>
+
+            <p class="text-center">
+                <a href="{{ post.get_absolute_url }}">Go back</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
