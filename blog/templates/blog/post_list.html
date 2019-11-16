@@ -4,9 +4,9 @@
     {% for post in posts %}
         <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 
-        <p>{{ post.text }}</p>
+        <p>{{ post.text|linebreaksbr|truncatewords:50 }}</p>
 
-        <p>{{ post.author }}</p>
+        <p class="text-muted text-right">Author: {{ post.author }} | {{ post.published_date }}</p>
 
         <hr>
     {% endfor %}
