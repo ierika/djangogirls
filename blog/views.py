@@ -29,7 +29,7 @@ def post_detail(request, pk):
             comment.post = post
             comment.author = request.user
             comment.save()
-            return redirect('post_detail', pk=post.pk, slug=post.title)
+            return redirect('post_detail', pk=post.pk)
 
     return render(request, 'blog/post_detail.html', {
         'post': post,
